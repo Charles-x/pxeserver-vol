@@ -1,6 +1,6 @@
 #PXESERVER-VOL Version 0.1
-MAINTAINER charles.xiao "charles-xiao@live.com"
 FROM alpine:3.5
+MAINTAINER charles.xiao "charles-xiao@live.com"
 VOLUME /pxe/
 WORKDIR /pxe/
 RUN wget https://stable.release.core-os.net/amd64-usr/current/coreos_production_pxe.vmlinuz
