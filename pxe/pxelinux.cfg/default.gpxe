@@ -1,0 +1,11 @@
+default coreos
+prompt 1
+timeout 15
+
+display boot.msg
+
+label coreos
+  menu default
+  kernel ftp://192.168.1.115/coreos/coreos_production_pxe.vmlinuz
+  initrd ftp://192.168.1.115/coreos/coreos_production_pxe_image.cpio.gz
+  append cloud-config-url=http://192.192.2.1/coreos/cloud-config.yml
