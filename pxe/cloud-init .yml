@@ -1,0 +1,43 @@
+#cloud-config
+hostname: node10 
+coreos:
+  etcd2:
+    discovery: http://discovery.dtwh.com/c2618a38c9c7fec26ae252a527fc0ec7
+    listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
+  fleet:
+    metadata: "role=worker,cabinet=two,disk=spinning"
+    etcd_servers: "http://192.192.0.52:2379"
+  locksmith:
+    endpoint: "http://192.192.0.52:2379"
+  units:
+    - name: update-engine.service  
+      command: stop
+    - name: etcd.service 
+      command: start 
+    - name: fleet.service 
+      command: start
+    - name: docker.service 
+      command: start
+    - name: static.network 
+      content: |
+        [Match] 
+        Name=ens192 #Running "ip a" query NIC Name
+        [Network] 
+        Address=192.192.0.60/22
+        Gateway=192.192.0.1
+        DNS=192.192.3.250
+        DNS=192.168.0.1
+    - name: "docker.service"
+      drop-ins:
+        - name: "50-registry-mirror.conf"
+          content: |
+            [Service]
+            Environment=DOCKER_OPTS='--registry-mirror=https://vk7xybrx.mirror.aliyuncs.com'
+ssh_authorized_keys:
+ - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDHNOg0dDFUApB2bAZpnBp3+TIn8ZPajwtMPuCOqdhN212o0BKEHqv7GeS0PJBB/gVeBbi3nZhmiTpUzSryaRS5OrVHMuKeimCQmk479ttdimb2Se0KKiuGQlWkUmqTNTggkByVZnblrm8cPSQESQ0AqWtY2bSNeFVzNDBsD4RPDw== zhaog@CN
+
+users: 
+  - name: core 
+  - groups: 
+      - sudo 
+      - docker

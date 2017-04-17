@@ -1,0 +1,18 @@
+#cloud-config
+hostname: node10 
+coreos:
+  units:
+    - name: etcd.service 
+      command: start 
+    - name: fleet.service 
+      command: start
+    - name: docker.service 
+      command: start
+ssh_authorized_keys:
+ - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDHNOg0dDFUApB2bAZpnBp3+TIn8ZPajwtMPuCOqdhN212o0BKEHqv7GeS0PJBB/gVeBbi3nZhmiTpUzSryaRS5OrVHMuKeimCQmk479ttdimb2Se0KKiuGQlWkUmqTNTggkByVZnblrm8cPSQESQ0AqWtY2bSNeFVzNDBsD4RPDw== zhaog@CN
+
+users: 
+  - name: core 
+  - groups: 
+      - sudo 
+      - docker
