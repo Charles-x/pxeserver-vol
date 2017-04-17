@@ -8,7 +8,7 @@ RUN wget https://stable.release.core-os.net/amd64-usr/current/coreos_production_
 RUN wget https://stable.release.core-os.net/amd64-usr/current/coreos_production_pxe_image.cpio.gz --no-check-certificate
 RUN wget https://github.com/Charles-x/pxeserver-vol/blob/master/pxe/pxelinux.0 --no-check-certificate
 RUN wget https://github.com/Charles-x/pxeserver-vol/blob/master/pxe/gpxelinux.0 --no-check-certificate
-RUN wget https://github.com/Charles-x/pxeserver-vol/blob/master/pxe/cloud-init .yml --no-check-certificate
+RUN wget https://github.com/Charles-x/pxeserver-vol/blob/master/pxe/cloud-init.yml --no-check-certificate
 RUN wget https://github.com/Charles-x/pxeserver-vol/blob/master/pxe/cloud-config.yml --no-check-certificate
 RUN wget https://github.com/Charles-x/pxeserver-vol/blob/master/entrypoint.sh --no-check-certificate
 RUN mv pxelinux.0 pxelinux.0.pxe ; mv gpxelinux.0 gpxelinux.0.gpxe
