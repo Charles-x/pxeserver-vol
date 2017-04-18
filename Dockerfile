@@ -1,7 +1,6 @@
 #PXESERVER-VOL Version 0.1
 FROM alpine:3.5
 MAINTAINER charles.xiao "charles-xiao@live.com"
-VOLUME /pxe
 WORKDIR /pxe
 RUN apk update && apk add wget
 RUN wget -P /pxe https://stable.release.core-os.net/amd64-usr/current/coreos_production_pxe.vmlinuz --no-check-certificate
@@ -17,4 +16,5 @@ ENV PXEMODE pxe
 ENV KERNELPATH coreos_production_pxe.vmlinuz
 ENV INITRDPATH coreos_production_pxe_image.cpio.gz
 ENV CLOUDCONFIGPATH cloud-config.yml
+VOLUME /pxe
 CMD sh /pxe/entrypoint.sh
